@@ -1,0 +1,1 @@
+export const PRICE_LIST ='PRICE_LIST'
