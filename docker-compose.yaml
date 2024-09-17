@@ -1,0 +1,9 @@
+version: '1.0'
+
+services:
+  mis-report-frontend:
+    build: .
+    image: mis-report-frontend-img
+    ports:
+      - 3030:3030
+    restart: unless-stopped

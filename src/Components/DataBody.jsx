@@ -1,55 +1,62 @@
-import React, { useEffect, useState } from 'react'
-import HeaderT2 from '../Helper/HeaderT2'
-import Footer from '../Helper/Footer'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import DataTable from '../Helper/DataTable'
+import Footer from '../Helper/Footer'
+import HeaderT2 from '../Helper/HeaderT2'
 
 
-function DataBody({ pageno,attributes, tdata }) {  
+function DataBody({ pageno, attributes, tdata,  description_2 }) {  
+  const priceListHeaderDetails = useSelector((state) => state.priceListHeaderDetails)
+  const rowPlaceValue = useSelector((state) => state.rowPlaceValue)
+  const thead = priceListHeaderDetails.table_header_title
+  
   return (
-    <div className='w-[210mm] h-[297mm] border mt-5'>
+    <div className=' w-[210mm] min-h-[297mm]  border mt-5' >
+      <div className='relative '>
+      </div>
       <div className='h-[100%]'>
           <div className='px-16 pt-14'>
-          <HeaderT2 />
+          <HeaderT2 priceListHeaderDetails={priceListHeaderDetails} />
           </div>
-          <p className='border-t-2'></p>
+        <p className='border-t-2'></p>
         <>
-          {/* <p className='px-16 pt-5 text-2xl font-bold'>{attributes}</p> */}
-          <div className='px-16 pt-5'>
-            {
+          <div className='px-16 pt-5 pb-20'>
+            {description_2?.[0] &&
+              <div className='mb-5'>
+                <span className='font-bold'>{description_2?.[0]}</span>
+              </div>
             }
-            <DataTable thead={["Item Code", "Classiﬁcation", "Brandname", "Size(mm)", "UoM", "List Price as per UoM"]}
+            <DataTable thead={thead.map((x)=>{return x.replaceAll("_"," ")})}
               tbody={
                 <>
                   <tr>
-                    {[...Array(6).keys()].map((i)=>{
+                    {[...Array(priceListHeaderDetails.table_header_title.length).keys()].map((i, j) => {
                       return (
-                        <td className='text-[#626262] text-xs td p-2.5'></td>
-)
-                    })}
-                  </tr>
-                  <tr>
-                    <td colSpan={6} className='text-[#626262] text-xs text-left font-bold pl-4'>{attributes}</td>
-                  </tr>
-                  <tr>
-                    {[...Array(6).keys()].map((i) => {
-                      return (
-                        <td className='text-[#626262] text-xs td p-2.5'></td>
+                        <td key={i} className='text-[#626262] text-xs td p-2.5'></td>
                       )
                     })}
                   </tr>
-                     {tdata?.map((i, j) => {
-                  return (
-                  <tr className='text-left tr' key={j}>
-                    <td className='text-[#626262] text-xs td'>{i.item_code}</td>
-                    <td className='text-[#626262] text-xs td'>{i.classification != "0" ? i.classification : ""}</td>
-                    <td className='text-[#626262] text-xs td'>{i.brand_name}</td>
-                    <td className='text-[#626262] text-xs td'>{i.size}</td>
-                    <td className='text-[#626262] text-xs td'>{i.uom}</td>
-                    <td className='text-[#626262] text-xs td'>{i.price_list_amt}</td>
+                  <tr>
+                    <td colSpan={3} className='text-[#626262] text-xs text-left font-bold pl-4'>{attributes}</td>
                   </tr>
-                  )
-                     })}
-                  
+                  <tr>
+                    {[...Array(priceListHeaderDetails.table_header_title.length).keys()].map((i,j) => {
+                      return (
+                        <td key={i} className='text-[#626262] text-xs td p-2.5'></td>
+                      )
+                    })}
+                  </tr>
+                  {tdata?.map((i, j) => {
+                    return (
+                      <tr className='tr' key={j + i}>
+                        {rowPlaceValue.map((x, d) => {
+                          return (
+                            <td key={d} className='text-[#626262] text-xs td'>{i[x]}</td>
+                          )
+                        })}
+                      </tr>
+                    )
+                  })}
              </>
               }
             />
@@ -70,4 +77,7 @@ export default DataBody
 
 
 
-
+// price_list_wires_and_flux {ITEM_CODE,CLASSIFICATION,BRAND_NAME,SIZE,PACKING,UOM,LIST_PRICE_AS_PER_UOM}
+// price_list_electrode {ITEM_CODE,CLASSIFICATION,BRAND_NAME,SIZE,UOM,LIST_PRICE_AS_PER_UOM}
+// price_list_spares {DESCRIPTION,PRODUCT_CODE,UOM,LIST_PRICE}
+// price_list_hypertherm {SUB_PRODUCT,ITEM,UOM,LIST_PRICE_AS_PER_UOM}

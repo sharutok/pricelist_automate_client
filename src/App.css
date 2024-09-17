@@ -26,4 +26,48 @@
 body,html{
   font-family: "Source Sans Pro";
   color: #808285;
+  scroll-behavior: smooth;
 }
+
+/* CSS */
+.button-39 {
+  background-color: #F4D738;
+  border: 3px solid black;
+  width:30rem;
+  height:7rem;
+  /* border-radius: .5rem; */
+  box-sizing: border-box;
+  color: #111827;
+  font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  padding: .75rem 1rem;
+  /* text-align: center; */
+  text-decoration: none #D1D5DB solid;
+  text-decoration-thickness: auto;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-39:hover {
+  background-color: #C4A1FF;
+  /* box-shadow: 5px 5px #69D2E7, 10px 10px #7FBC8C, 15px 15px #9723C9; */
+  /* box-shadow: ; */
+  cursor: pointer;
+}
+
+.button-39:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.button-39:focus-visible {
+  box-shadow: none;
+}
+
+
+.w3-animate-zoom {animation:animatezoom 0.6s}@keyframes animatezoom{from{transform:scale(0)} to{transform:scale(1)}}

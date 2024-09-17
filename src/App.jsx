@@ -1,9 +1,11 @@
-import './App.css'
-import Page from './Components/Page'
+import './App.css';
+import RoutePath from './Components/RoutePath';
+
 
 function App() {
+  
   return (
-      <Page />
+    <RoutePath />
     )
 }
 export default App
