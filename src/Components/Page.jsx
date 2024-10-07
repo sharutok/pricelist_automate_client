@@ -1,11 +1,11 @@
 import axios from 'axios'
 import html2canvas from 'html2canvas'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import Token from '../CustomHooks/useGenerateHooks'
 import { endpoints } from '../Helper/Api'
-import { setDataRows, setIndexes, setPricelistHeaderDetails, setRowPlaceValue } from '../redux/actions'
+import { setDataRows, setIndexes, setPricelistHeaderDetails, setPricelistHeaderDetailsStatus, setRowPlaceValue } from '../redux/actions'
 import DataBody from './DataBody'
 import FirstPage from './FirstPage'
 import ImageP from './ImageTemplate'
@@ -16,6 +16,7 @@ import MessageLetter from './MessageLetter'
 import TermsAndConditions from './TermsAndConditions'
 import IndexesForEGP from './EGP/IndexesForEGP'
 import DataBodyForEGP from './EGP/DataBodyForEGP'
+import ErrorPage from '../Helper/ErrorPage'
 
 function Page() {
   const { pname } = useParams()
@@ -23,15 +24,15 @@ function Page() {
   const indexes = useSelector((state) => state.indexes)
   const dataRows = useSelector((state) => state.dataRows)
   const priceListHeaderDetails = useSelector((state) => state.priceListHeaderDetails)
-  
+  const priceListHeaderDetailsStatus = useSelector((state) => state.priceListHeaderDetailsStatus)
 
   //fetch data based on pricelist id
   async function fetchData() {
-    const token = await Token()
+    
     const data = await axios.post(endpoints.get_data_based_on_pricelist_name, {
       pname
     }, {
-      headers: { Authorization: `Bearer ${token}}` }
+      headers: { Authorization: `Bearer ${await Token()}` }
     })
     dispatch(setRowPlaceValue(data?.data?.body))
     dispatch(setDataRows(data?.data?._final_data));
@@ -40,72 +41,24 @@ function Page() {
 
   //fetch pricelist header info based on pricelist id
   const fetchHeaderData = async () => {
-    const data = await axios.post(endpoints.get_header_based_on_pricelist_name, { pname })
-    dispatch(setPricelistHeaderDetails({ ...data?.data }))
+    try {
+      const data = await axios.post(endpoints.get_header_based_on_pricelist_name, { pname }, {
+        headers: { Authorization: `Bearer ${await Token()}` }
+      })
+      dispatch(setPricelistHeaderDetails({ ...data?.data }))
+    } catch (error) {
+    }
   }
 
-  const observer = useRef(null);
-  
-/*
-useEffect(() => {
-    const handleIntersection = (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          console.log('Currently visible ID:', entry.target.id);
-        }
-      });
-    };
-
-    observer.current = new IntersectionObserver(handleIntersection, {
-      threshold: 0.5 // Adjust this threshold as needed
-    });
-
-    const elements = document.querySelectorAll('.scrollable-component');
-    elements.forEach(element => observer.current.observe(element));
-
-    return () => {
-      if (observer.current) {
-        observer.current.disconnect();
-      }
-    };
-  }, []);
-  */
   
   useEffect(() => {
     fetchHeaderData()
     fetchData()
   }, [])
 
-  const handleCaptureClick = async () => {
-    if (captureRef.current) {
-      // Wait for all images within the captureRef to load
-      const images = captureRef.current.getElementsByTagName('img');
-      const imagePromises = Array.from(images).map(img => {
-        if (img.complete) {
-          return Promise.resolve();
-        } else {
-          return new Promise(resolve => {
-            img.onload = () => resolve();
-            img.onerror = () => resolve();  // Resolve even if image fails to load
-          });
-        }
-      });
-
-      // Wait for all images to be fully loaded
-      await Promise.all(imagePromises);
-
-      const canvas = await html2canvas(captureRef.current, {
-        useCORS: true,  // Enable CORS for cross-origin images
-        scale: 1,       // Increase scale for better resolution
-      });
-
-      const imgData = canvas.toDataURL('image/png');
-      const link = document.createElement('a');
-      link.href = imgData;
-      link.download = 'captured-image.png';
-      link.click();
-    }
-  };
+  if (!(indexes?.length || dataRows?.length)>=1 ) { 
+    return(<ErrorPage/>)
+  }
 
     const downloadHtml = () => {
       // Get the HTML content of the page
@@ -133,9 +86,10 @@ useEffect(() => {
       document.body.removeChild(link);
   };
 
+
   return (
     <>
-      <button onClick={downloadHtml}>Capture as Image</button>
+      {/* <button onClick={downloadHtml}>Capture as Image</button> */}
       <div   className='flex justify-center relative'>
         <div  className='grid gap-5 my-10'>
           <div className='border'> <Intro /></div>
@@ -191,7 +145,6 @@ useEffect(() => {
             <div>
                 {
                 dataRows?.map((val, i) => {
-                  console.log(i + 1);
                   return (
                     <div  key={i} id={`section${Number(i + 1)}`} className='grid gap-5 scrollable-component'>
                       <DataBodyForEGP

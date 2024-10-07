@@ -3,6 +3,7 @@ import { endpoints } from '../Helper/Api'
 import axios from 'axios'
 
 export default async function Token() {
-    const response = await axios.get(endpoints.generate_token)
-    return response?.data?.token
+    const response = await axios.post(endpoints.generate_token, { secure_pass: import.meta.env.VITE_SECURE_PASS })
+    return (response?.data?.token);
+    
 }

@@ -19,11 +19,11 @@ function IndexesForEGP({ indexes }) {
                     <IndexTable priceListHeaderDetails={priceListHeaderDetails} tbody={
                         indexes?.map((x, i) => {
                             return (
-                                <tr key={i} id={`#section${x.page_no}`} className='text-left'>
+                                <tr key={i} id={`#section${x.start_pg}`} className='text-left'>
                                     <td>
-                                        <li className='hover:underline hover:underline-offset-4 hover:cursor-pointer'><a href={`#section${x.page_no}`}>{x.attr}</a></li>
+                                        <li className='hover:underline hover:underline-offset-4 hover:cursor-pointer'><a href={`#section${x.start_pg}`}>{x.attr}</a></li>
                                     </td>
-                                    <td className='text-nowrap'>{x.page_no}</td>
+                                    <td className='text-nowrap'>{x.start_pg}{x.end_pg && `-${x.end_pg}`} </td>
                                 </tr>
                             )
                         })

@@ -1,6 +1,6 @@
 // redux/reducers.js
 
-import { SET_CHAT_LIST, SET_INPUT_MESSAGE_TEXT, SET_DATA_ROWS, SET_INDEXES, SET_ROW_PLACE_VALUE,SET_PRICELIST_HEADER_DETAILS } from "./contants";
+import { SET_CHAT_LIST, SET_INPUT_MESSAGE_TEXT, SET_DATA_ROWS, SET_INDEXES, SET_ROW_PLACE_VALUE,SET_PRICELIST_HEADER_DETAILS, SET_AUTH_TOKEN, SET_PRICELIST_HEADER_DETAILS_STATUS } from "./contants";
 
 
 const initialState = {
@@ -15,7 +15,9 @@ const initialState = {
         pricelist_description: '',
         pricelist_headers_model_name: '',
         table_header_title: ''
-    }
+    },
+    authToken: "",
+    PricelistHeaderDetailsStatus:""
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -32,6 +34,10 @@ const rootReducer = (state = initialState, action) => {
             return { ...state, rowPlaceValue: action.payload };
         case SET_PRICELIST_HEADER_DETAILS:
             return { ...state, priceListHeaderDetails: action.payload };
+        case SET_AUTH_TOKEN:
+            return { ...state, authToken: action.payload };
+        case SET_PRICELIST_HEADER_DETAILS_STATUS:
+            return { ...state, priceListHeaderDetails :action.payload}
         default:
             return state;
     }

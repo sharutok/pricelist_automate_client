@@ -1,9 +1,9 @@
-version: '1.0'
+version: '3'
 
 services:
-  mis-report-frontend:
+  pricelist-client:
     build: .
-    image: mis-report-frontend-img
+    image: pricelist-client-image
     ports:
-      - 3030:3030
+      - "3090:3090"
     restart: unless-stopped
