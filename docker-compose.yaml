@@ -4,6 +4,7 @@ services:
   pricelist-client:
     build: .
     image: pricelist-client-image
+    container_name: pricelist-prod
     ports:
       - "3090:3090"
     restart: unless-stopped

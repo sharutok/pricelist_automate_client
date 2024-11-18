@@ -49,9 +49,11 @@ function Page() {
   const fetchHeaderData = async () => {
     try {
       const token = localStorage.getItem("token")
+      
       const data = await axios.post(endpoints.get_header_based_on_pricelist_name, { pname }, {
         headers: { Authorization: `Bearer ${token}` }
       })
+      document.title=`Pricelist - ${data?.data?.pricelist_description}`
       dispatch(setPricelistHeaderDetails({ ...data?.data }))
     } catch (error) {
       console.log("error in fetchHeaderData",error);
