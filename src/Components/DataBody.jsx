@@ -51,7 +51,7 @@ function DataBody({ pageno, attributes, tdata,  description_2 }) {
                       <tr className='tr' key={j + i}>
                         {rowPlaceValue.map((x, d) => {
                           return (
-                            <td key={d} className='text-[#626262] text-xs td'>{i[x]}</td>
+                            <td key={d} className='text-[#626262] text-xs  td'>{i[x]}</td>
                           )
                         })}
                       </tr>
