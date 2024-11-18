@@ -56,8 +56,8 @@ function DataBodyForEGP({ description_2, attributes, pageno, tdata }) {
                                                     })}
                                                 </tr>}
                                                 {is_there_f ? <>
-                                                {i?.parent_classfications?<tr ><td colSpan={header_length.length} className='text-[#626262] text-xs text-left font-bold pl-4 td'>{i?.parent_classfications}</td></tr>:""}
-                                                {i?.product_classifications ? <tr ><td colSpan={header_length.length} className='text-[#626262] text-xs text-left font-bold pl-4 td'>{i?.product_classifications}</td></tr>:""}
+                                                {i?.parent_classfications?<tr ><td colSpan={header_length.length} className='text-[#626262] text-xs text-center font-bold pl-4 td'>{i?.parent_classfications}</td></tr>:""}
+                                                {i?.product_classifications ? <tr ><td colSpan={header_length.length} className='text-[#626262] text-xs text-center font-bold pl-4 td'>{i?.product_classifications}</td></tr>:""}
                                               {i?.F?.map((f,x) => {
                                                 return (
                                                     <tr key={x}>
@@ -79,9 +79,9 @@ function DataBodyForEGP({ description_2, attributes, pageno, tdata }) {
                                                     })}
                                                 </tr>}
                                                 <>
-                                                    {i?.optional_classification ? <tr ><td className='text-[#626262] text-xs text-left font-bold pl-4'>{i?.optional_classification}</td></tr> : ""} 
-                                                    {(!is_there_f && i?.parent_classfications) ? <tr ><td colSpan={header_length.length} className='text-[#626262] text-xs text-left font-bold pl-4 td'>{i?.parent_classfications}</td></tr> : ""}
-                                                    {(!is_there_f && i?.product_classifications) ? <tr ><td colSpan={header_length.length} className='text-[#626262] text-xs text-left font-bold pl-4 td'>{i?.product_classifications}</td></tr> : ""}
+                                                    {i?.optional_classification ? <tr ><td className='text-[#626262] text-xs text-center font-bold pl-4'>{i?.optional_classification}</td></tr> : ""} 
+                                                    {(!is_there_f && i?.parent_classfications) ? <tr ><td colSpan={header_length.length} className='text-[#626262] text-xs text-center font-bold pl-4 td'>{i?.parent_classfications}</td></tr> : ""}
+                                                    {(!is_there_f && i?.product_classifications) ? <tr ><td colSpan={header_length.length} className='text-[#626262] text-xs text-center font-bold pl-4 td'>{i?.product_classifications}</td></tr> : ""}
                                                     {i?.S?.map((f,x) => {
                                                         return (
                                                             <tr key={x}>
