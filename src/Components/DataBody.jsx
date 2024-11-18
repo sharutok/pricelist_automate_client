@@ -73,11 +73,3 @@ function DataBody({ pageno, attributes, tdata,  description_2 }) {
 export default DataBody
 
 
-
-
-
-
-// price_list_wires_and_flux {ITEM_CODE,CLASSIFICATION,BRAND_NAME,SIZE,PACKING,UOM,LIST_PRICE_AS_PER_UOM}
-// price_list_electrode {ITEM_CODE,CLASSIFICATION,BRAND_NAME,SIZE,UOM,LIST_PRICE_AS_PER_UOM}
-// price_list_spares {DESCRIPTION,PRODUCT_CODE,UOM,LIST_PRICE}
-// price_list_hypertherm {SUB_PRODUCT,ITEM,UOM,LIST_PRICE_AS_PER_UOM}

@@ -28,28 +28,35 @@ function Page() {
 
   //fetch data based on pricelist id
   async function fetchData() {
-    
-    const data = await axios.post(endpoints.get_data_based_on_pricelist_name, {
-      pname
-    }, {
-      headers: { Authorization: `Bearer ${await Token()}` }
-    })
-    dispatch(setRowPlaceValue(data?.data?.body))
-    dispatch(setDataRows(data?.data?._final_data));
-    dispatch(setIndexes(data?.data?.index))
+    try {
+      const token = await Token()
+      localStorage.setItem("token",token)
+      const data = await axios.post(endpoints.get_data_based_on_pricelist_name, {
+        pname
+      }, {
+        headers: { Authorization: `Bearer ${token }` }
+      })
+      dispatch(setRowPlaceValue(data?.data?.body))
+      dispatch(setDataRows(data?.data?._final_data));
+      dispatch(setIndexes(data?.data?.index))
+      
+    } catch (error) {
+      console.log("error in fetchData",error);
+    }
   }
-
+  
   //fetch pricelist header info based on pricelist id
   const fetchHeaderData = async () => {
     try {
+      const token = localStorage.getItem("token")
       const data = await axios.post(endpoints.get_header_based_on_pricelist_name, { pname }, {
-        headers: { Authorization: `Bearer ${await Token()}` }
+        headers: { Authorization: `Bearer ${token}` }
       })
       dispatch(setPricelistHeaderDetails({ ...data?.data }))
     } catch (error) {
+      console.log("error in fetchHeaderData",error);
     }
   }
-
   
   useEffect(() => {
     fetchHeaderData()

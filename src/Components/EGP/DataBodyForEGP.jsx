@@ -35,7 +35,7 @@ function DataBodyForEGP({ description_2, attributes, pageno, tdata }) {
                     <div className='px-16 pt-5 pb-20'>
                         <DataTable thead={thead.map((x) => { return x?.replaceAll("_", " ") })}
                             tbody={
-                                <>
+                                <React.Fragment >
                                     <tr>
                                         {header_length?.map((i, j) => {
                                             return (
@@ -58,9 +58,9 @@ function DataBodyForEGP({ description_2, attributes, pageno, tdata }) {
                                                 {is_there_f ? <>
                                                 {i?.parent_classfications?<tr ><td colSpan={header_length.length} className='text-[#626262] text-xs text-left font-bold pl-4 td'>{i?.parent_classfications}</td></tr>:""}
                                                 {i?.product_classifications ? <tr ><td colSpan={header_length.length} className='text-[#626262] text-xs text-left font-bold pl-4 td'>{i?.product_classifications}</td></tr>:""}
-                                              {i?.F?.map(f => {
+                                              {i?.F?.map((f,x) => {
                                                 return (
-                                                    <tr>
+                                                    <tr key={x}>
                                                     <td className='text-[#626262] text-xs td'>{f.brand_name}</td>
                                                     <td className='text-[#626262] text-xs td'>{f.item_code}</td>
                                                     <td className='text-[#626262] text-xs td'>{f.uom}</td>
@@ -82,9 +82,9 @@ function DataBodyForEGP({ description_2, attributes, pageno, tdata }) {
                                                     {i?.optional_classification ? <tr ><td className='text-[#626262] text-xs text-left font-bold pl-4'>{i?.optional_classification}</td></tr> : ""} 
                                                     {(!is_there_f && i?.parent_classfications) ? <tr ><td colSpan={header_length.length} className='text-[#626262] text-xs text-left font-bold pl-4 td'>{i?.parent_classfications}</td></tr> : ""}
                                                     {(!is_there_f && i?.product_classifications) ? <tr ><td colSpan={header_length.length} className='text-[#626262] text-xs text-left font-bold pl-4 td'>{i?.product_classifications}</td></tr> : ""}
-                                                    {i?.S?.map(f => {
+                                                    {i?.S?.map((f,x) => {
                                                         return (
-                                                            <tr>
+                                                            <tr key={x}>
                                                                 <td className='text-[#626262] text-xs td'>{f.brand_name}</td>
                                                                 <td className='text-[#626262] text-xs td'>{f.item_code}</td>
                                                                 <td className='text-[#626262] text-xs td'>{f.uom}</td>
@@ -98,7 +98,7 @@ function DataBodyForEGP({ description_2, attributes, pageno, tdata }) {
                                         )
                                     }) : ""}
                                     
-                                </>
+                                </React.Fragment>
                             }
                         />
                     </div>
