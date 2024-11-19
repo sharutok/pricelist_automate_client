@@ -66,7 +66,9 @@ function Page() {
   }, [])
 
   if (!(indexes?.length || dataRows?.length)>=1 ) { 
-    return(<ErrorPage/>)
+    return (<>
+    <p>Loading...</p>
+    </>)
   }
 
     const downloadHtml = () => {
@@ -104,10 +106,10 @@ function Page() {
           <div className='border'> <Intro /></div>
           <div className='border'> <ImageP /></div>
           <div className='border'> <MessageLetter /></div>
-          {priceListHeaderDetails.pricelist_headers_model_name !== "price_list_egp" ?
+          {priceListHeaderDetails?.pricelist_headers_model_name !== "price_list_egp" ?
             <div >
             {
-              indexes.map((s,k) => {
+              indexes?.map((s,k) => {
                 return (
                   Number(s.length) !== 0 &&
                   <div key={k} className='grid gap-5 border mt-5'>
@@ -121,7 +123,7 @@ function Page() {
           </div> :
             <div>
               {
-                indexes.map((s, k) => {
+                indexes?.map((s, k) => {
                   return (
                     Number(s.length) !== 0 &&
                     <div key={k} className='grid gap-5 border mt-5'>
