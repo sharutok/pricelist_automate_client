@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pricelist-client
+  labels:
+    io.kompose.service: pricelist-client
+spec:
+  replicas: 2  # Set replicas to 2 for high availability
+  selector:
+    matchLabels:
+      io.kompose.service: pricelist-client
+  template:
+    metadata:
+      labels:
+        io.kompose.service: pricelist-client
+    spec:
+      containers:
+        - image: sharuto/pricelist-frontend:tagname
+          name: pricelist-prod
+          ports:
+            - containerPort: 3090
+      restartPolicy: Always

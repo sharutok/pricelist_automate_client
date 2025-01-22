@@ -14,7 +14,7 @@ const IMAGES = {
     lastpageimage: `${url}/electrode-pricelist-collection/Picture7.png`,
     'electrode_intro': `${url}/electrode-pricelist-collection/Picture3.jpg`,
     'w&f_intro': `${url}/wires-and-flux-pricelist-collection/startingPage.jpg`,
-    'egp_intro': `${url}/electrode-pricelist-collection/Picture3.jpg`,
+    'egp_intro': `${url}/welding-equipment-gcp-ppe-pricelist-collection/EGP_.png`,
     'hypertherm_intro': `${url}/hypertherm-pricelist-collection/startingPage.png`,
     'spares_intro': `${url}/spares-collection/startingPage.png`,
 }
